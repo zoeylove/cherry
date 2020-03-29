@@ -1,0 +1,18 @@
+<launch>
+    <arg name="bagname" value="/home/tony/kitti_odometry_data_color_sequence_00.bag"/>
+    <!-- <arg name="imu_msg_name" value="/xsens/imu_data"/> -->
+    <arg name="leftimage_msg_name" value="/kitti/camera_color_left/image_rect"/>
+    <arg name="rightimage_msg_name" value="/kitti/camera_color_right/image_rect"/>
+    <arg name="saving_dir" value="/home/tony/1"/>
+    
+    <node pkg="cherry" type="split_bag" name="split" output="screen">
+        <param name="bagname" type="string" value="$(arg bagname) "/>
+        <!-- <param name="imu_msg_name" type="string" value="$(arg imu_msg_name)"/> -->
+        <param name="leftimage_msg_name" type="string" value="$(arg leftimage_msg_name)"/>
+        <param name="rightimage_msg_name" type="string" value="$(arg rightimage_msg_name)"/>
+        <param name="saving_dir" type="string" value="$(arg saving_dir)"/>
+    </node>
+ 
+
+</launch>
+

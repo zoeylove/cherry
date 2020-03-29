@@ -1,0 +1,21 @@
+<launch>
+    <arg name="adjust_tf" default="false"/>
+
+  <!-- Publish TF: x y z yaw pitch roll -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tf_lidar_center_to_lidar_left"  args="0.0 0.46 -0.27 1.57 0.49 0.0 lidar_center lidar_left" unless="$(arg adjust_tf)"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tf_lidar_center_to_lidar_right" args="0.0 -0.43 -0.27 -1.57 0.61 0.0 lidar_center lidar_right" unless="$(arg adjust_tf)"/>
+
+  <node pkg="tf_publisher_gui" type="tf_publisher_gui" name="tf_lidar_center_to_lidar_left" if="$(arg adjust_tf)">
+    <param name="parent_frame" value="lidar_center"/>
+    <param name="child_frame" value="lidar_left"/>
+  </node>
+  <node pkg="tf_publisher_gui" type="tf_publisher_gui" name="tf_lidar_center_to_lidar_right" if="$(arg adjust_tf)">
+    <param name="parent_frame" value="lidar_center"/>
+    <param name="child_frame" value="lidar_right"/>
+  </node>
+
+  <node pkg="cherry" type="lidar_ins_tf" name="gpstf" >
+  </node>
+
+</launch>
+
